@@ -11,6 +11,5 @@ module.exports = {
   ],
   babelrcRoots: [
     '.',
-    'src/services/*',
   ],
 };

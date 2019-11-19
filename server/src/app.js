@@ -28,10 +28,10 @@ app.use(session({
 }));
 
 /*  Passport setup  */
-passport.serializeUser(function(user, done) {
+passport.serializeUser((user, done) => {
   done(null, user);
 });
-passport.deserializeUser(function(user, done) {
+passport.deserializeUser((user, done) => {
   done(null, user);
 });
 app.use(passport.initialize());
@@ -43,7 +43,7 @@ app.use((req, res, next) => {
     'Access-Control-Allow-Origin': req.headers.origin || '',
     'Access-Control-Allow-Credentials': 'true',
     'Access-Control-Allow-Methods': 'GET, POST, DELETE, OPTIONS, PUT, PATCH',
-    'Access-Control-Allow-Headers': 'Content-Type, Set-Cookie, *'
+    'Access-Control-Allow-Headers': 'Content-Type, Set-Cookie, *',
   });
   next();
 });
@@ -60,8 +60,8 @@ app.use((req, res, next) => {
 });
 
 /*  Error middleware  */
+// eslint-disable-next-line no-unused-vars
 app.use((err, req, res, _) => {
-  console.log(err);
   logger.error(err.message);
   res.status(err.status || httpStatus.INTERNAL_SERVER_ERROR).send({ error: err.message });
 });
