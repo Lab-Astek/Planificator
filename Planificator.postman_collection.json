@@ -1,0 +1,27 @@
+{
+	"info": {
+		"_postman_id": "491a58ec-a11b-4572-978e-ef9047765938",
+		"name": "Planificator",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "{{API}}/ping",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "{{API}}/ping",
+					"host": [
+						"{{API}}"
+					],
+					"path": [
+						"ping"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
