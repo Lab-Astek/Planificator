@@ -1,0 +1,36 @@
+{
+  "name": "planificator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/app.js",
+  "scripts": {
+    "build": "babel src -d dist",
+    "start": "nodemon --watch src --copy-files --exec \"npm run build && node dist/app.js\"",
+    "lint": "npx eslint src --fix",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lab-Astek/Planificator.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Lab-Astek/Planificator/issues"
+  },
+  "homepage": "https://github.com/Lab-Astek/Planificator#readme",
+  "dependencies": {
+    "@babel/cli": "^7.7.0",
+    "@babel/core": "^7.6.4",
+    "@babel/plugin-transform-modules-commonjs": "^7.6.0",
+    "@babel/plugin-transform-runtime": "^7.6.2",
+    "@babel/preset-env": "^7.6.3",
+    "@babel/runtime": "^7.6.3",
+    "@types/passport": "^1.0.1",
+    "babel-plugin-module-resolver": "^3.2.0",
+    "http-errors": "^1.7.3",
+    "http-status-codes": "^1.4.0",
+    "validate.js": "^0.13.1"
+  }
+}

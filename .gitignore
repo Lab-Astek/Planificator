@@ -1,3 +1,13 @@
+# Build
+dist
+
+# Logs
+logs
+*.log
+
+# Misc
+.idea
+
 # Logs
 logs
 *.log
