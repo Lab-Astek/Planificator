@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  server:
+    build: "server/"
+    environment:
+      - PORT=${APP_PORT}
+    ports:
+      - "${APP_PORT}:${APP_PORT}"
+    volumes:
+      - ./server/logs:/app/logs
