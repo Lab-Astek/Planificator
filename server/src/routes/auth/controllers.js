@@ -2,16 +2,12 @@ import createError from 'http-errors';
 import * as httpStatus from 'http-status-codes';
 import jwt from 'jsonwebtoken';
 
-import {privateKey} from 'config/appConfig.json';
+import { privateKey } from 'config/appConfig.json';
 // eslint-disable-next-line import/named
 import { admin, firebase } from 'appDatabase';
 import logger from 'appLogger';
 
 function authMiddleware(req, res, next) {
-  if (req.method === 'OPTIONS') {
-    next();
-    return;
-  }
   const { token } = req.session;
   if (!token) throw createError(httpStatus.UNAUTHORIZED, 'No token provided');
 
