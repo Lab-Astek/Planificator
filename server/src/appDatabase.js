@@ -11,7 +11,9 @@ admin.initializeApp({
 
 firebase.initializeApp(firebaseConfig);
 
+const database = admin.database();
+
 module.exports = {
-  firebaseAdmin: admin,
+  database,
   firebase,
 };

@@ -3,8 +3,7 @@ import * as httpStatus from 'http-status-codes';
 import jwt from 'jsonwebtoken';
 
 import { privateKey } from 'config/appConfig.json';
-// eslint-disable-next-line import/named
-import { firebaseAdmin, firebase } from 'appDatabase';
+import { database, firebase } from 'appDatabase';
 import logger from 'appLogger';
 
 function authMiddleware(req, res, next) {
@@ -33,9 +32,9 @@ async function login(req, context) {
       email: user.email,
     }, privateKey);
 
-    const dbUser = await firebaseAdmin.database().ref(`/users/${user.uid}`).once('value');
+    const dbUser = await database.ref(`/users/${user.uid}`).once('value');
     if (!dbUser.val()) {
-      await firebaseAdmin.database().ref(`/users/${user.uid}`).set({ email: user.email });
+      await database.ref(`/users/${user.uid}`).set({ email: user.email });
     }
     req.session.token = token;
     logger.info(`User ${user.email} just logged in`);
