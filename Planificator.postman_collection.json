@@ -6,7 +6,7 @@
 	},
 	"item": [
 		{
-			"name": "{{API}}/ping",
+			"name": "Ping",
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -20,6 +20,53 @@
 						"ping"
 					]
 				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "{{API}}/auth/login",
+					"host": [
+						"{{API}}"
+					],
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Admin signin",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\": \"guillaume1.hector@epitech.eu\",\n\t\"password\": \"password\"\n}"
+				},
+				"url": {
+					"raw": "{{API}}/auth/admin",
+					"host": [
+						"{{API}}"
+					],
+					"path": [
+						"auth",
+						"admin"
+					]
+				},
+				"description": "Just a convenience road to signin with postman, allowing to store a jwt and to access full roles while using postman\nWill be deleted with the release of the application"
 			},
 			"response": []
 		}
