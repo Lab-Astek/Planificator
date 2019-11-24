@@ -12,6 +12,6 @@ admin.initializeApp({
 firebase.initializeApp(firebaseConfig);
 
 module.exports = {
-  admin,
+  firebaseAdmin: admin,
   firebase,
 };

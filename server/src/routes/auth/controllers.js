@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken';
 
 import { privateKey } from 'config/appConfig.json';
 // eslint-disable-next-line import/named
-import { admin, firebase } from 'appDatabase';
+import { firebaseAdmin, firebase } from 'appDatabase';
 import logger from 'appLogger';
 
 function authMiddleware(req, res, next) {
@@ -27,9 +27,9 @@ async function login(req, context) {
     const { user } = await firebase.auth().signInWithCredential(credential);
     const token = jwt.sign({ id: user.uid }, privateKey);
 
-    const dbUser = await admin.database().ref(`/users/${user.uid}`).once('value');
+    const dbUser = await firebaseAdmin.database().ref(`/users/${user.uid}`).once('value');
     if (!dbUser.val()) {
-      await admin.database().ref(`/users/${user.uid}`).set({ email: user.email });
+      await firebaseAdmin.database().ref(`/users/${user.uid}`).set({ email: user.email });
     }
     req.session.token = token;
     logger.info(`User ${user.email} just logged in`);
