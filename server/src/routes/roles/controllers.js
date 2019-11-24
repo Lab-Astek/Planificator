@@ -56,7 +56,6 @@ async function updateRole(context, role) {
   await database.update(path, JSON.parse(JSON.stringify({ name, email })));
 }
 
-
 async function deleteRole(context, role) {
   const { id } = context;
   const path = `/${role}/${id}`;
