@@ -4,7 +4,7 @@ import * as httpStatus from 'http-status-codes';
 
 import logger from 'appLogger';
 
-function validateAdminCreation(req) {
+function validateRoleCreation(req) {
   const constraints = {
     email: {
       email: true,
@@ -29,5 +29,5 @@ function validateAdminCreation(req) {
 }
 
 module.exports = {
-  validateAdminCreation,
+  validateRoleCreation,
 };

@@ -6,37 +6,53 @@ import logger from 'appLogger';
 
 import Roles from './roles';
 
-function roleMiddleware(role) {
+function roleMiddleware(roles) {
   return async (req, res, next) => {
-    if (!Object.values(Roles).includes(role)) {
-      next(createError(httpStatus.INTERNAL_SERVER_ERROR, `Route protected with an unknown role : ${role}`));
-    } else {
-      const roleUsers = await database.getArrayFrom(`/${role}`);
-      if (!roleUsers.find((roleUser) => roleUser.email === req.auth.email)) {
-        next(createError(httpStatus.FORBIDDEN, `You need to have ${role} role to interact with this API endpoints`));
-      } else {
-        next();
+    const rolesValidation = roles.every((role) => {
+      if (!Object.values(Roles).includes(role)) {
+        next(createError(httpStatus.INTERNAL_SERVER_ERROR, `Route protected with an unknown role : ${role}`));
+        return false;
       }
+      return true;
+    });
+    if (!rolesValidation) {
+      return;
+    }
+
+    const rolesUsers = await Promise.all(roles.map((role) => database.getArrayFrom(`/${role}`)));
+    const isAuthorized = !rolesUsers.every((roleUsers) => !roleUsers.find((roleUser) => roleUser.email === req.auth.email));
+
+    if (!isAuthorized) {
+      next(createError(httpStatus.FORBIDDEN, `You need to have one of those roles ${roles} to interact with this API endpoints`));
+    } else {
+      next();
     }
   };
 }
 
-async function createAdmin(context) {
+async function createRole(context, role) {
   const { email, name } = context;
-  const path = `/${Roles.ADMIN}`;
+  const path = `/${role}`;
 
   const admins = await database.getArrayFrom(path);
   if (admins.find((admin) => admin.email === email)) {
-    throw createError(httpStatus.CONFLICT, `${Roles.ADMIN} [ ${email} ] already exists`);
+    throw createError(httpStatus.CONFLICT, `${role} [ ${email} ] already exists`);
   }
   if (admins.find((admin) => admin.name === name)) {
-    throw createError(httpStatus.CONFLICT, `${Roles.ADMIN} [ ${name} ] already exists`);
+    throw createError(httpStatus.CONFLICT, `${role} [ ${name} ] already exists`);
   }
   await database.push({ email, name });
-  logger.info(`[ ${email} ] registered as [ ${Roles.ADMIN} ]!`);
+  logger.info(`[ ${email} ] registered as [ ${role} ]!`);
+}
+
+async function getRoles(role) {
+  const path = `/${role}`;
+
+  return database.getArrayFrom(path);
 }
 
 module.exports = {
   roleMiddleware,
-  createAdmin,
+  createRole,
+  getRoles,
 };
