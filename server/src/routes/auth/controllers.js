@@ -2,9 +2,9 @@ import createError from 'http-errors';
 import * as httpStatus from 'http-status-codes';
 import jwt from 'jsonwebtoken';
 
-import { privateKey } from 'config/appConfig.json';
+import {privateKey} from 'config/appConfig.json';
 // eslint-disable-next-line import/named
-import { firebase, admin } from 'appDatabase';
+import { admin, firebase } from 'appDatabase';
 import logger from 'appLogger';
 
 function authMiddleware(req, res, next) {
@@ -42,7 +42,20 @@ async function login(req, context) {
   }
 }
 
+async function logAsAdmin(req, context) {
+  const { email, password } = context;
+
+  try {
+    const { user } = await firebase.auth().signInWithEmailAndPassword(email, password);
+    req.session.token = jwt.sign({ id: user.uid }, privateKey);
+    logger.info(`User ${user.email} just logged in as ADMIN`);
+  } catch (err) {
+    throw createError(httpStatus.UNAUTHORIZED, err.message);
+  }
+}
+
 module.exports = {
   authMiddleware,
   login,
+  logAsAdmin,
 };

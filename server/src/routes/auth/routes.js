@@ -7,6 +7,7 @@ import { googleOAuth } from 'config/appConfig.json';
 import logger from 'appLogger';
 
 import * as controllers from './controllers';
+import * as validators from './validators';
 
 const router = express.Router();
 
@@ -35,8 +36,19 @@ router.get('/login/callback', passport.authenticate('google', {
   failureRedirect: '/login',
 }), async (req, res, next) => {
   try {
-    await controllers.login(req, req.user);
-    res.status(httpStatus.OK).send();
+    const context = await validators.validateLogin(req);
+    const result = await controllers.login(req, context);
+    res.status(httpStatus.OK).send(result);
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.post('/admin', async (req, res, next) => {
+  try {
+    const context = await validators.validateAdmin(req);
+    const result = await controllers.logAsAdmin(req, context);
+    res.status(httpStatus.OK).send(result);
   } catch (err) {
     next(err);
   }
