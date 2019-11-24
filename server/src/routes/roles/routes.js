@@ -38,4 +38,33 @@ router.get('/admin', astekMiddleware, async (req, res, next) => {
   }
 });
 
+router.post('/astek', adminMiddleware, async (req, res, next) => {
+  try {
+    const context = await validators.validateRoleCreation(req);
+    const result = await controllers.createRole(context, Roles.ASTEK);
+    res.status(httpStatus.OK).send(result);
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.delete('/astek', adminMiddleware, async (req, res, next) => {
+  try {
+    const context = await validators.validateRoleDeletion(req);
+    const result = await controllers.deleteRole(context, Roles.ASTEK);
+    res.status(httpStatus.OK).send(result);
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.get('/astek', astekMiddleware, async (req, res, next) => {
+  try {
+    const result = await controllers.getRoles(Roles.ASTEK);
+    res.status(httpStatus.OK).send(result);
+  } catch (err) {
+    next(err);
+  }
+});
+
 module.exports = router;
