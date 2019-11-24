@@ -25,7 +25,13 @@ async function login(req, context) {
   try {
     const credential = firebase.auth.GoogleAuthProvider.credential(null, accessToken);
     const { user } = await firebase.auth().signInWithCredential(credential);
-    const token = jwt.sign({ id: user.uid }, privateKey);
+    if (!user.email) {
+      throw new Error('An error occurred: cannot read user email');
+    }
+    const token = jwt.sign({
+      id: user.uid,
+      email: user.email,
+    }, privateKey);
 
     const dbUser = await firebaseAdmin.database().ref(`/users/${user.uid}`).once('value');
     if (!dbUser.val()) {
@@ -43,7 +49,10 @@ async function logAsAdmin(req, context) {
 
   try {
     const { user } = await firebase.auth().signInWithEmailAndPassword(email, password);
-    req.session.token = jwt.sign({ id: user.uid }, privateKey);
+    req.session.token = jwt.sign({
+      id: user.uid,
+      email,
+    }, privateKey);
     logger.info(`User ${user.email} just logged in as ADMIN`);
   } catch (err) {
     throw createError(httpStatus.UNAUTHORIZED, err.message);
