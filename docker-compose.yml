@@ -4,7 +4,8 @@ services:
   server:
     build: "server/"
     environment:
-      - PORT=${APP_PORT}
+      - PORT=${SERVER_PORT}
+      - URL=${SERVER_URL}
     ports:
       - "${APP_PORT}:${APP_PORT}"
     volumes:

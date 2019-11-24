@@ -10,8 +10,7 @@ import routes from './routes';
 
 /*  Express server instantiation  */
 const app = express();
-const defaultPort = 8080;
-const port = process.env.PORT || defaultPort;
+const port = process.env.PORT;
 
 /*  Middlewares */
 app.use(morgan('tiny'));

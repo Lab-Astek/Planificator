@@ -1,0 +1,8 @@
+{
+  "privateKey": "your private key",
+  "googleOAuth": {
+    "clientId": "Your google app client ID",
+    "clientSecret": "Your google app client secret",
+    "callbackRoute": "/auth/login/callback"
+  }
+}
