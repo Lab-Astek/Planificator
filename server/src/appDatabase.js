@@ -35,7 +35,15 @@ class Database {
   }
 
   async push(path, value) {
-    await this._database.ref(path).push(value);
+    const newRef = await this._database.ref(path).push(value);
+    return {
+      id: newRef.key,
+      ...value,
+    };
+  }
+
+  async delete(path) {
+    await this._database.ref(path).remove();
   }
 }
 

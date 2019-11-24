@@ -41,8 +41,16 @@ async function createRole(context, role) {
   if (admins.find((admin) => admin.name === name)) {
     throw createError(httpStatus.CONFLICT, `${role} [ ${name} ] already exists`);
   }
-  await database.push({ email, name });
+  const result = await database.push(path, { email, name });
   logger.info(`[ ${email} ] registered as [ ${role} ]!`);
+  return result;
+}
+
+async function deleteRole(context, role) {
+  const { id } = context;
+  const path = `/${role}/${id}`;
+
+  await database.delete(path);
 }
 
 async function getRoles(role) {
@@ -54,5 +62,6 @@ async function getRoles(role) {
 module.exports = {
   roleMiddleware,
   createRole,
+  deleteRole,
   getRoles,
 };

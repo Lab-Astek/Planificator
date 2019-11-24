@@ -19,6 +19,16 @@ router.post('/admin', adminMiddleware, async (req, res, next) => {
   }
 });
 
+router.delete('/admin', adminMiddleware, async (req, res, next) => {
+  try {
+    const context = await validators.validateRoleDeletion(req);
+    const result = await controllers.deleteRole(context, Roles.ADMIN);
+    res.status(httpStatus.OK).send(result);
+  } catch (err) {
+    next(err);
+  }
+});
+
 router.get('/admin', astekMiddleware, async (req, res, next) => {
   try {
     const result = await controllers.getRoles(Roles.ADMIN);

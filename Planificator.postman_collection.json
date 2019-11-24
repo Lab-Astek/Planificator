@@ -108,6 +108,52 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "List admins",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "{{API}}/roles/admin",
+					"host": [
+						"{{API}}"
+					],
+					"path": [
+						"roles",
+						"admin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete admin",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\": \"-LuUNha1QTD-MAO983Hb\"\n}"
+				},
+				"url": {
+					"raw": "{{API}}/roles/admin",
+					"host": [
+						"{{API}}"
+					],
+					"path": [
+						"roles",
+						"admin"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
