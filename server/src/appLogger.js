@@ -26,4 +26,15 @@ if (process.env.MODE !== 'production') {
   }));
 }
 
+logger.validatorsLog = (errors) => {
+  let output = 'The following fields are not valid :\n';
+  Object.keys(errors).forEach((property) => {
+    const messages = errors[property];
+    messages.forEach((message) => {
+      output += `\t${message}\n`;
+    });
+  });
+  return output;
+};
+
 module.exports = logger;
