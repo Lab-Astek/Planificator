@@ -43,7 +43,7 @@
 			"response": []
 		},
 		{
-			"name": "Admin signin",
+			"name": "Debug signin",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -67,6 +67,45 @@
 					]
 				},
 				"description": "Just a convenience road to signin with postman, allowing to store a jwt and to access full roles while using postman\nWill be deleted with the release of the application"
+			},
+			"response": []
+		},
+		{
+			"name": "Create admin",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "ea35e3ca-1c4b-4928-85ee-6f8f36220fc5",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\": \"guillaume1.hector@epitech.eu\",\n\t\"name\": \"Test admin\"\n}"
+				},
+				"url": {
+					"raw": "{{API}}/roles/admin",
+					"host": [
+						"{{API}}"
+					],
+					"path": [
+						"roles",
+						"admin"
+					]
+				}
 			},
 			"response": []
 		}
