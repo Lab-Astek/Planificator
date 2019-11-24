@@ -1,13 +1,8 @@
 # Private config
-
 config
 
 # Build
 dist
-
-# Logs
-logs
-*.log
 
 # Misc
 .idea
