@@ -24,6 +24,8 @@ async function login(req, context) {
   try {
     const credential = firebase.auth.GoogleAuthProvider.credential(null, accessToken);
     const { user } = await firebase.auth().signInWithCredential(credential);
+    const path = `/users/${user.uid}`;
+
     if (!user.email) {
       throw new Error('An error occurred: cannot read user email');
     }
@@ -32,9 +34,9 @@ async function login(req, context) {
       email: user.email,
     }, privateKey);
 
-    const dbUser = await database.ref(`/users/${user.uid}`).once('value');
-    if (!dbUser.val()) {
-      await database.ref(`/users/${user.uid}`).set({ email: user.email });
+    const dbUser = await database.getValueFrom(path);
+    if (!dbUser) {
+      await database.set(path, { email: user.email });
     }
     req.session.token = token;
     logger.info(`User ${user.email} just logged in`);
