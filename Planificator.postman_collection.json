@@ -1,507 +1,282 @@
 {
 	"info": {
-		"_postman_id": "239321d2-a3ca-4421-b806-204f8d1961f3",
-		"name": "Dashboard",
+		"_postman_id": "491a58ec-a11b-4572-978e-ef9047765938",
+		"name": "Planificator",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "Signup",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"email\": \"guillaume.hector@epitech.eu\",\n\t\"password\": \"password\"\n}"
-				},
-				"url": {
-					"raw": "{{API}}/auth/signup",
-					"host": [
-						"{{API}}"
-					],
-					"path": [
-						"auth",
-						"signup"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Signin",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"email\": \"guillaume.hector@epitech.eu\",\n\t\"password\": \"password\"\n}"
-				},
-				"url": {
-					"raw": "{{API}}/auth/signin",
-					"host": [
-						"{{API}}"
-					],
-					"path": [
-						"auth",
-						"signin"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "About.json",
+			"name": "Ping",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"body": {},
 				"url": {
-					"raw": "{{API}}/about.json",
+					"raw": "{{API}}/ping",
 					"host": [
 						"{{API}}"
 					],
 					"path": [
-						"about.json"
+						"ping"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Météo",
+			"name": "Login",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"body": {},
 				"url": {
-					"raw": "{{API}}/services/weather?city=paris",
+					"raw": "{{API}}/auth/login",
 					"host": [
 						"{{API}}"
 					],
 					"path": [
-						"services",
-						"weather"
-					],
-					"query": [
-						{
-							"key": "city",
-							"value": "paris"
-						},
-						{
-							"key": "countryCode",
-							"value": "",
-							"disabled": true
-						}
+						"auth",
+						"login"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Create widget",
+			"name": "Debug signin",
 			"request": {
 				"method": "POST",
 				"header": [
 					{
 						"key": "Content-Type",
 						"value": "application/json"
-					},
-					{
-						"key": "Authorization",
-						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImlHNW1LMDc2N2dNZUlMMlNKaUpNS2VXQzFkcjIiLCJpYXQiOjE1NzM0OTI4NjN9.AWeeqaie78PSqBQTVfWM99I-fFb-PM945LenXwH9K3I"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"service\": \"weather\",\n\t\"name\": \"weather\",\n\t\"params\": [{\n\t\t\"name\": \"city\",\n\t\t\"value\": \"london\"\n\t}, {\n\t\t\"name\": \"countryCode\",\n\t\t\"value\": \"uk\"\n\t}],\n\t\"x\": 127,\n\t\"y\": 0,\n\t\"height\": 200,\n\t\"width\": 300,\n\t\"interval\": 2\n}"
+					"raw": "{\n\t\"email\": \"guillaume1.hector@epitech.eu\",\n\t\"password\": \"password\"\n}"
 				},
 				"url": {
-					"raw": "{{API}}/widget",
+					"raw": "{{API}}/auth/admin",
 					"host": [
 						"{{API}}"
 					],
 					"path": [
-						"widget"
+						"auth",
+						"admin"
+					]
+				},
+				"description": "Just a convenience road to signin with postman, allowing to store a jwt and to access full roles while using postman\nWill be deleted with the release of the application"
+			},
+			"response": []
+		},
+		{
+			"name": "Create admin",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "ea35e3ca-1c4b-4928-85ee-6f8f36220fc5",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\": \"guillaume1.hector@epitech.eu\",\n\t\"name\": \"Test admin\"\n}"
+				},
+				"url": {
+					"raw": "{{API}}/roles/admin",
+					"host": [
+						"{{API}}"
+					],
+					"path": [
+						"roles",
+						"admin"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Delete widget",
+			"name": "List admins",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "{{API}}/roles/admin",
+					"host": [
+						"{{API}}"
+					],
+					"path": [
+						"roles",
+						"admin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete admin",
 			"request": {
 				"method": "DELETE",
 				"header": [
 					{
 						"key": "Content-Type",
 						"value": "application/json"
-					},
-					{
-						"key": "Authorization",
-						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImlHNW1LMDc2N2dNZUlMMlNKaUpNS2VXQzFkcjIiLCJpYXQiOjE1NzM0OTI4NjN9.AWeeqaie78PSqBQTVfWM99I-fFb-PM945LenXwH9K3I"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"id\": \"431fc385-74bd-4e3e-9f77-23fbed8c618b\"\n}"
+					"raw": "{\n\t\"id\": \"-LuUNha1QTD-MAO983Hb\"\n}"
 				},
 				"url": {
-					"raw": "{{API}}/widget",
+					"raw": "{{API}}/roles/admin",
 					"host": [
 						"{{API}}"
 					],
 					"path": [
-						"widget"
+						"roles",
+						"admin"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Update widget",
+			"name": "Create astek",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\": \"guillaume.hector@epitech.eu\",\n\t\"name\": \"LeChatErrant\"\n}"
+				},
+				"url": {
+					"raw": "{{API}}/roles/astek",
+					"host": [
+						"{{API}}"
+					],
+					"path": [
+						"roles",
+						"astek"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List asteks",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "{{API}}/roles/astek",
+					"host": [
+						"{{API}}"
+					],
+					"path": [
+						"roles",
+						"astek"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete astek",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\": \"-LuUPlD9qes1iUNApl2e\"\n}"
+				},
+				"url": {
+					"raw": "{{API}}/roles/astek",
+					"host": [
+						"{{API}}"
+					],
+					"path": [
+						"roles",
+						"astek"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update admin",
 			"request": {
 				"method": "PATCH",
 				"header": [
 					{
 						"key": "Content-Type",
 						"value": "application/json"
-					},
-					{
-						"key": "Authorization",
-						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImlHNW1LMDc2N2dNZUlMMlNKaUpNS2VXQzFkcjIiLCJpYXQiOjE1NzM0OTI4NjN9.AWeeqaie78PSqBQTVfWM99I-fFb-PM945LenXwH9K3I"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"id\": \"03c6ba91-f70a-4932-8b35-828604d56cac\",\n\t\"x\": 1234,\n\t\"y\": 4321,\n\t\"height\": 1,\n\t\"width\": 2,\n\t\"interval\": 777,\n\t\"params\": [\n        {\n            \"name\": \"city\",\n            \"value\": \"paris\"\n        }\n    ]\n}"
+					"raw": "{\n\t\"id\": \"-LuTpLrQgbyd8W97VF97\",\n\t\"name\": \"THE ONLY GOD!!\"\n}"
 				},
 				"url": {
-					"raw": "{{API}}/widget/update",
+					"raw": "{{API}}/roles/admin",
 					"host": [
 						"{{API}}"
 					],
 					"path": [
-						"widget",
-						"update"
+						"roles",
+						"admin"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "List widgets",
+			"name": "Update astek",
 			"request": {
-				"method": "GET",
+				"method": "PATCH",
 				"header": [
 					{
-						"key": "Authorization",
-						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImlHNW1LMDc2N2dNZUlMMlNKaUpNS2VXQzFkcjIiLCJpYXQiOjE1NzM0OTI4NjN9.AWeeqaie78PSqBQTVfWM99I-fFb-PM945LenXwH9K3I"
+						"key": "Content-Type",
+						"value": "application/json"
 					}
 				],
-				"body": {},
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\": \"-LuTpLrQgbyd8W97VF97\",\n\t\"name\": \"THE ONLY GOD!!\"\n}"
+				},
 				"url": {
-					"raw": "{{API}}/widget",
+					"raw": "{{API}}/roles/astek",
 					"host": [
 						"{{API}}"
 					],
 					"path": [
-						"widget"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "List available services",
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": ""
-					}
-				],
-				"body": {},
-				"url": {
-					"raw": "{{API}}/services",
-					"host": [
-						"{{API}}"
-					],
-					"path": [
-						"services"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Twitter feed",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {},
-				"url": {
-					"raw": "{{API}}/services/twitter/feed?keywords=banana",
-					"host": [
-						"{{API}}"
-					],
-					"path": [
-						"services",
-						"twitter",
-						"feed"
-					],
-					"query": [
-						{
-							"key": "keywords",
-							"value": "banana"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Currency rate",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {},
-				"url": {
-					"raw": "{{API}}/services/currency?from=EUR",
-					"host": [
-						"{{API}}"
-					],
-					"path": [
-						"services",
-						"currency"
-					],
-					"query": [
-						{
-							"key": "from",
-							"value": "EUR"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Get hour",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {},
-				"url": {
-					"raw": "{{API}}/services/hour?lat=12&lng=12",
-					"host": [
-						"{{API}}"
-					],
-					"path": [
-						"services",
-						"hour"
-					],
-					"query": [
-						{
-							"key": "lat",
-							"value": "12"
-						},
-						{
-							"key": "lng",
-							"value": "12"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Redtube",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {},
-				"url": {
-					"raw": "{{API}}/services/redtube?keywords=cucumber",
-					"host": [
-						"{{API}}"
-					],
-					"path": [
-						"services",
-						"redtube"
-					],
-					"query": [
-						{
-							"key": "keywords",
-							"value": "cucumber"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Giginore",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {},
-				"url": {
-					"raw": "{{API}}/services/github/gitignore?name=Node",
-					"host": [
-						"{{API}}"
-					],
-					"path": [
-						"services",
-						"github",
-						"gitignore"
-					],
-					"query": [
-						{
-							"key": "name",
-							"value": "Node"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "github repo",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {},
-				"url": {
-					"raw": "{{API}}/services/github/repo?user=LeChatErrant&repo=tractopelle",
-					"host": [
-						"{{API}}"
-					],
-					"path": [
-						"services",
-						"github",
-						"repo"
-					],
-					"query": [
-						{
-							"key": "user",
-							"value": "LeChatErrant"
-						},
-						{
-							"key": "repo",
-							"value": "tractopelle"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "youtube",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {},
-				"url": {
-					"raw": "{{API}}/services/google/youtube",
-					"host": [
-						"{{API}}"
-					],
-					"path": [
-						"services",
-						"google",
-						"youtube"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "maps",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {},
-				"url": {
-					"raw": "{{API}}/services/google/maps?from=55,rue,de,Paris,92110,Clichy&to=rue,pasteur,kremlin,bicetre",
-					"host": [
-						"{{API}}"
-					],
-					"path": [
-						"services",
-						"google",
-						"maps"
-					],
-					"query": [
-						{
-							"key": "from",
-							"value": "55,rue,de,Paris,92110,Clichy"
-						},
-						{
-							"key": "to",
-							"value": "rue,pasteur,kremlin,bicetre"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "imgur search",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {},
-				"url": {
-					"raw": "{{API}}/services/imgur/search?keywords=cat,cucumber",
-					"host": [
-						"{{API}}"
-					],
-					"path": [
-						"services",
-						"imgur",
-						"search"
-					],
-					"query": [
-						{
-							"key": "keywords",
-							"value": "cat,cucumber"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Deviantart search",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {},
-				"url": {
-					"raw": "{{API}}/services/deviantart/search?keywords=cat",
-					"host": [
-						"{{API}}"
-					],
-					"path": [
-						"services",
-						"deviantart",
-						"search"
-					],
-					"query": [
-						{
-							"key": "keywords",
-							"value": "cat"
-						}
+						"roles",
+						"astek"
 					]
 				}
 			},

@@ -46,6 +46,17 @@ async function createRole(context, role) {
   return result;
 }
 
+async function updateRole(context, role) {
+  const { id, name, email } = context;
+  const path = `/${role}/${id}`;
+
+  if (!await database.getValueFrom(path)) {
+    throw createError(httpStatus.NOT_FOUND, `${path} does not exists`);
+  }
+  await database.update(path, JSON.parse(JSON.stringify({ name, email })));
+}
+
+
 async function deleteRole(context, role) {
   const { id } = context;
   const path = `/${role}/${id}`;
@@ -62,6 +73,7 @@ async function getRoles(role) {
 module.exports = {
   roleMiddleware,
   createRole,
+  updateRole,
   deleteRole,
   getRoles,
 };

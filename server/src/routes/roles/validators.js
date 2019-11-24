@@ -28,6 +28,25 @@ function validateRoleCreation(req) {
   return req.body;
 }
 
+function validateRoleModification(req) {
+  const constraints = {
+    id: {
+      presence: {
+        allowEmpty: false,
+      },
+      type: 'string',
+    },
+  };
+
+  const errors = validate(req.body, constraints);
+  if (errors) {
+    const msg = logger.validatorsLog(errors);
+    throw createError(httpStatus.BAD_REQUEST, msg);
+  }
+
+  return req.body;
+}
+
 function validateRoleDeletion(req) {
   const constraints = {
     id: {
@@ -47,8 +66,8 @@ function validateRoleDeletion(req) {
   return req.body;
 }
 
-
 module.exports = {
   validateRoleCreation,
+  validateRoleModification,
   validateRoleDeletion,
 };

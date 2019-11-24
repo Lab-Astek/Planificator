@@ -19,6 +19,16 @@ router.post('/admin', adminMiddleware, async (req, res, next) => {
   }
 });
 
+router.patch('/admin', adminMiddleware, async (req, res, next) => {
+  try {
+    const context = await validators.validateRoleModification(req);
+    const result = await controllers.updateRole(context, Roles.ADMIN);
+    res.status(httpStatus.OK).send(result);
+  } catch (err) {
+    next(err);
+  }
+});
+
 router.delete('/admin', adminMiddleware, async (req, res, next) => {
   try {
     const context = await validators.validateRoleDeletion(req);
@@ -42,6 +52,16 @@ router.post('/astek', adminMiddleware, async (req, res, next) => {
   try {
     const context = await validators.validateRoleCreation(req);
     const result = await controllers.createRole(context, Roles.ASTEK);
+    res.status(httpStatus.OK).send(result);
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.patch('/astek', adminMiddleware, async (req, res, next) => {
+  try {
+    const context = await validators.validateRoleModification(req);
+    const result = await controllers.updateRole(context, Roles.ASTEK);
     res.status(httpStatus.OK).send(result);
   } catch (err) {
     next(err);
