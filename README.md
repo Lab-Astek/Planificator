@@ -24,7 +24,7 @@ It allows Asteks to see their assignations, to block days where they aren't avai
 
 It also comes with an admin interface, allowing Lab Astek referents to easily manage all Asteks
 
-Maybe is it the end of the old Sunday-Excel epoch..? Maybe are we in Epitech, the IT innovation school? Who nose.
+Maybe is it the end of the old Sunday-Excels epoch..? Maybe are we at Epitech, the IT innovation school? Who NOSE.
 
 ___
 
@@ -36,7 +36,7 @@ ____
 
 ## Deployment
 
-1. Configure environment variables in the `.env` at the root of the repository:
+1. Configure environment variables in the `.env` file at the root of the repository
 
 2. Run `docker-compose up --build`
 
